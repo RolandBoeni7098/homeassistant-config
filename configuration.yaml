@@ -1,0 +1,94 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+#Logger
+recorder:
+  db_url: mysql://homeassistant:)b^#>1eE@~zCK=sA2-D9/j5I+@core-mariadb/homeassistant?charset=utf8mb4
+
+http:
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+homeassistant:
+    customize: !include customize.yaml
+
+#themes
+frontend:
+    themes: !include_dir_merge_named themes
+
+#google calendar
+google:
+  client_id: 360045872821-07ucirlv5k2dsaie4a2e8pf1g90cf0d9.apps.googleusercontent.com
+  client_secret: nJuA5OZGNmyWBDt07PtZqMrp
+
+    
+# Workday detection
+binary_sensor:
+  - platform: workday
+    country: "NO"
+
+#PC detection
+  - platform: ping
+    host: 10.0.0.10
+    name: "Linux PC"
+    count: 2
+    scan_interval: 30
+
+# Example configuration.yaml entry for Netgear device
+device_tracker:
+  - platform: ping
+    interval_seconds: 10
+    consider_home: 300
+    hosts:
+      roland_phone: 10.0.0.5
+    new_device_defaults:
+      track_new_devices: true
+
+#Saison detection
+sensor:
+  - platform: season
+#Carbage removal
+  - platform: wasteplan_trv
+    bin_number: 859
+# Calculation for floorplan
+  - platform: template
+    sensors:
+        ## Calculates daylight brightness out of 100%
+      sunlight_pct:
+        entity_id:
+          - sun.sun
+          - sensor.dark_sky_cloud_coverage
+        value_template: >-
+          {%- set elevation = state_attr('sun.sun','elevation') | float %}
+          {%- set cloud_coverage = states('sensor.dark_sky_cloud_coverage') | float %}
+          {%- set cloud_factor = (1 - (0.75 * ( cloud_coverage / 100) ** 3 )) %}
+          {%- set min_elevation = -9 %}
+          {%- set max_elevation = 55 %}
+          {%- set adjusted_elevation = elevation - min_elevation %}
+          {%- set adjusted_elevation = [adjusted_elevation,0] | max %}
+          {%- set adjusted_elevation = [adjusted_elevation,max_elevation - min_elevation] | min %}
+          {%- set adjusted_elevation = adjusted_elevation / (max_elevation - min_elevation) %}
+          {%- set adjusted_elevation = adjusted_elevation %}
+          {%- set adjusted_elevation = adjusted_elevation * 100 %}
+          {%- set brightness = adjusted_elevation * cloud_factor %}
+          {{ brightness | round }}
+        unit_of_measurement: '%'
+        device_class: 'illuminance'
+
+      sunlight_opacity:
+        entity_id:
+          - sensor.sunlight_pct
+        value_template: >-
+          {%- set sunpct = states('sensor.sunlight_pct') | float %}
+          {%- set opacity = sunpct / 100 | float %}
+          {{ opacity }}

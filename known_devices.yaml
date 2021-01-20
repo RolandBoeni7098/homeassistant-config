@@ -1,0 +1,7 @@
+
+roland_phone:
+  name: roland_phone
+  mac:
+  icon: mdi:cellphone-iphone
+  picture:
+  track: true

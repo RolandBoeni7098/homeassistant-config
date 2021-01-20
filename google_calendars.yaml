@@ -1,0 +1,49 @@
+
+- cal_id: rolandboeni@gmail.com
+  entities:
+  - device_id: rolandboeni_gmail_com
+    ignore_availability: true
+    name: rolandboeni@gmail.com
+    track: true
+
+- cal_id: no.ch#holiday@group.v.calendar.google.com
+  entities:
+  - device_id: helligdager_i_sveits
+    ignore_availability: true
+    name: Helligdager i Sveits
+    track: true
+
+- cal_id: no.polish#holiday@group.v.calendar.google.com
+  entities:
+  - device_id: helligdager_i_polen
+    ignore_availability: true
+    name: Helligdager i Polen
+    track: true
+
+- cal_id: no.norwegian#holiday@group.v.calendar.google.com
+  entities:
+  - device_id: helligdager_i_norge
+    ignore_availability: true
+    name: Helligdager i Norge
+    track: true
+
+- cal_id: 77f8eb1h7bga5e3j92c1kkjogk@group.calendar.google.com
+  entities:
+  - device_id: ferien
+    ignore_availability: true
+    name: Ferien
+    track: true
+
+- cal_id: nor_7541_%52osenborg#sports@group.v.calendar.google.com
+  entities:
+  - device_id: rosenborg
+    ignore_availability: true
+    name: Rosenborg
+    track: true
+
+- cal_id: addressbook#contacts@group.v.calendar.google.com
+  entities:
+  - device_id: fodselsdager
+    ignore_availability: true
+    name: "F\xF8dselsdager"
+    track: true

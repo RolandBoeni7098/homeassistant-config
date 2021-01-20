@@ -1,0 +1,15 @@
+alias: Home Assistant Restart
+description: ""
+trigger:
+  - platform: homeassistant
+    event: start
+condition: []
+action:
+  - service: input_boolean.turn_on
+    data: {}
+    entity_id: input_boolean.home_assistant_restarted
+mode: single
+
+ 
+
+ 

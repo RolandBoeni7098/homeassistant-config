@@ -1,0 +1,6 @@
+person.roland_boni:
+    entity_picture: /local/roland.jpg
+
+binary_sensor.linux_pc:
+    entity_picture: /local/pc.jpg
+
