@@ -53,6 +53,27 @@ device_tracker:
       roland_phone: 10.0.0.5
     new_device_defaults:
       track_new_devices: true
+  - platform: ping
+    interval_seconds: 10
+    consider_home: 300
+    hosts:
+      georg_phone: 10.0.0.9
+    new_device_defaults:
+      track_new_devices: true
+  - platform: ping
+    interval_seconds: 10
+    consider_home: 300
+    hosts:
+      eskil_phone: 10.0.0.13
+    new_device_defaults:
+      track_new_devices: true
+  - platform: ping
+    interval_seconds: 10
+    consider_home: 300
+    hosts:
+      jorn_phone: 10.0.0.8
+    new_device_defaults:
+      track_new_devices: true
 
 #Saison detection
 sensor:
