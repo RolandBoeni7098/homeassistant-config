@@ -44,7 +44,7 @@ binary_sensor:
     count: 2
     scan_interval: 30
 
-# Example configuration.yaml entry for Netgear device
+# Person tracking
 device_tracker:
   - platform: ping
     interval_seconds: 10
@@ -75,12 +75,13 @@ device_tracker:
     new_device_defaults:
       track_new_devices: true
 
-#Saison detection
 sensor:
+#Saison detection
   - platform: season
 #Carbage removal
   - platform: wasteplan_trv
     bin_number: 859
+
 # Calculation for floorplan
   - platform: template
     sensors:
